@@ -1,5 +1,7 @@
+/* ! Exclude this file from the build when compiling in Eclipse */
+
 #include <iostream>
-#include "single_linked_list.h"
+#include "SingleLinkedList.h"
 
 #define DEBUG 1
 
@@ -9,12 +11,12 @@ SingleLinkedList<T>::SingleLinkedList(){
 
 template<class T>
 SingleLinkedList<T>::~SingleLinkedList(){
-    cout << "Destructor called" << endl;
+    std::cout << "Destructor called" << std::endl;
     if (head != nullptr){
         Node *current = head;
         while (current != nullptr){
                 Node *next = current->next;
-                cout << "Deleting " << current->data << endl;
+                std::cout << "Deleting " << current->data << std::endl;
                 delete current;
                 
                 current = next;
@@ -28,10 +30,10 @@ void SingleLinkedList<T>::printList(){
     // Traverse list from head to tail and print all data
     Node *current = head;
     if (current == nullptr){
-        cout << "EMPTY" << endl;
+    	std::cout << "EMPTY" << std::endl;
     }else{
         while (current != nullptr){
-            cout << current->data << endl;
+        	std::cout << current->data << std::endl;
             current = current->next;
         }
     }
@@ -46,7 +48,7 @@ void SingleLinkedList<T>::appendNode(T dat){
     if (head == nullptr){
         // list is empty
         if (DEBUG){
-            cout << "Creating new list, ";
+        	std::cout << "Creating new list, ";
         }
         
         n->next = nullptr;
@@ -55,19 +57,24 @@ void SingleLinkedList<T>::appendNode(T dat){
 
     }else{
         // list already contains at least one node
-        cout << "Appending to List, ";
+    	std::cout << "Appending to List, ";
         tail->next = n;
         tail = n;
         n->next = nullptr;
     }
     if (DEBUG){
-            cout << "Data: " << n->data << endl;
+    	std::cout << "Data: " << n->data << std::endl;
         }
     length++;
 }
 
 template<class T>
-T SingleLinkedList<T>::operator[](int index){
+T& SingleLinkedList<T>::operator[](int index){
+	std::cout << "Called Normal []" << std::endl;
+    if (index > length){
+    	std::cout << index << std::endl;
+        throw std::out_of_range("List index out of range");
+    }
     int position = 0;
     Node *current_node = head;
     while (position < index){
@@ -77,12 +84,33 @@ T SingleLinkedList<T>::operator[](int index){
     return current_node->data;
 }
 
-/*
 template<class T>
-void SingleLinkedList<T>::insertNode(unsigned int index, T dat){
+void SingleLinkedList<T>::insertNode(int index, T dat){
     if (head == nullptr){
-        return
-    }
+    	appendNode(dat);
+    }else{
+    	int position = 0;
+    	Node *current_node = head;
+    	while (position < index){
+    		current_node = current_node->next;
+    		position++;
+    	}
+    	Node *n = new Node;
+    	n->data = dat;
 
+    }
 }
-*/
+
+template<class T>
+void SingleLinkedList<T>::deleteNode(int index){
+	if (head == nullptr){
+		throw std::logic_error("Can't delete node in empty list!");
+	}else{
+		int position = 0;
+		Node *current_node = head;
+		while (position < index){
+			current_node = current_node->next;
+			position++;
+		}
+	}
+}

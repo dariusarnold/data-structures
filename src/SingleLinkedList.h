@@ -1,5 +1,5 @@
-#ifndef SLL_H
-#define SLL_H
+#ifndef SINGLELIST_H
+#define SINGLELIST_H
 
 template<class T>
 class SingleLinkedList{
@@ -13,17 +13,23 @@ class SingleLinkedList{
     Node *tail = nullptr;
 
     public:
-    unsigned int length = 0;
+    int length = 0;
 
+    // Create an empty linked list
     SingleLinkedList();
     ~SingleLinkedList();
+    // Append dat to the end if the list
     void appendNode(T dat);
-    T operator[](int index);
+    // Enable read/write index access
+    T& operator[](int index);
+    // Insert dat at position index
     void insertNode(int index, T dat);
+    // Delete Node at index
     void deleteNode(int index);
+    // Output List
     void printList();
 };
 
-#include "single_linked_list.cpp"
+#include "SingleLinkedList.cpp"
 
 #endif
