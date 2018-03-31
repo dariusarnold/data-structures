@@ -18,7 +18,6 @@ SingleLinkedList<T>::~SingleLinkedList(){
                 Node *next = current->next;
                 std::cout << "Deleting " << current->data << std::endl;
                 delete current;
-                
                 current = next;
         }
         head = nullptr;
@@ -40,40 +39,43 @@ void SingleLinkedList<T>::printList(){
 }
 
 template<class T>
+bool SingleLinkedList<T>::isEmpty(){
+	return length == 0 ? true : false;
+}
+
+template<class T>
 void SingleLinkedList<T>::appendNode(T dat){
     // Append data dat to the end of the list
     Node *n = new Node();
     n->data = dat;
-    
-    if (head == nullptr){
-        // list is empty
-        if (DEBUG){
-        	std::cout << "Creating new list, ";
-        }
-        
-        n->next = nullptr;
+    n->next = nullptr;
+    if (length == 0){
+    	// Empty list: head also points to new node
         head = n;
-        tail = n;
-
     }else{
-        // list already contains at least one node
-    	std::cout << "Appending to List, ";
+    	// List not empty: next of previous node points to new node
         tail->next = n;
-        tail = n;
-        n->next = nullptr;
     }
-    if (DEBUG){
-    	std::cout << "Data: " << n->data << std::endl;
-        }
+    tail = n;
     length++;
+}
+
+template <class T>
+void SingleLinkedList<T>::prependNode(T dat){
+	// Prepend data dat to the beginning of the list
+	Node *n = new Node();
+	n->data = dat;
+	n->next = head;
+	head = n;
+	if (tail == nullptr) tail = n;
+	length++;
 }
 
 template<class T>
 T& SingleLinkedList<T>::operator[](int index){
-	std::cout << "Called Normal []" << std::endl;
     if (index > length){
-    	std::cout << index << std::endl;
-        throw std::out_of_range("List index out of range");
+    	std::string error_message = "List index " + std::to_string(index) + " out of range: " + std::to_string(length);
+        throw std::out_of_range(error_message);
     }
     int position = 0;
     Node *current_node = head;
@@ -86,18 +88,31 @@ T& SingleLinkedList<T>::operator[](int index){
 
 template<class T>
 void SingleLinkedList<T>::insertNode(int index, T dat){
-    if (head == nullptr){
-    	appendNode(dat);
-    }else{
+	// Insert node at a given position. Throws out of range exception if index is larger than list size
+	if (index > length){
+		std::string error_message = "List index " + std::to_string(index) + " out of range: " + std::to_string(length);
+		throw std::out_of_range(error_message);
+	}
+	if (index == 0){
+		prependNode(dat);
+	}else if (index == length){
+		appendNode(dat);
+	}
+	else{
+		Node *n = new Node();
+		n->data = dat;
     	int position = 0;
     	Node *current_node = head;
+    	Node *previous_node = head;
     	while (position < index){
+    		previous_node = current_node;
     		current_node = current_node->next;
     		position++;
     	}
-    	Node *n = new Node;
-    	n->data = dat;
-
+    	// Insert node into list
+    	previous_node->next = n;
+    	n->next = current_node;
+    	length++;
     }
 }
 
@@ -112,5 +127,6 @@ void SingleLinkedList<T>::deleteNode(int index){
 			current_node = current_node->next;
 			position++;
 		}
+		length--;
 	}
 }
