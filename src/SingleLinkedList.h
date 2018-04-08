@@ -5,8 +5,11 @@ template<class T>
 class SingleLinkedList{
     
     struct Node{
+    	Node();
+    	Node(T data);
+    	Node(T dat, Node* n);
         T data;
-        Node *next;
+        Node *next = nullptr;
     };
 
     Node *head = nullptr;

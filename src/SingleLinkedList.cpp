@@ -10,6 +10,19 @@ SingleLinkedList<T>::SingleLinkedList(){
 }
 
 template<class T>
+SingleLinkedList<T>::Node::Node(){}
+
+template<class T>
+SingleLinkedList<T>::Node::Node(T data):
+	data(data),
+	next(nullptr) {}
+
+template<class T>
+SingleLinkedList<T>::Node::Node(T data, Node* next):
+	data(data),
+	next(next) {}
+
+template<class T>
 SingleLinkedList<T>::~SingleLinkedList(){
     std::cout << "Destructor called" << std::endl;
     if (head != nullptr){
@@ -46,9 +59,7 @@ bool SingleLinkedList<T>::isEmpty(){
 template<class T>
 void SingleLinkedList<T>::appendNode(T dat){
     // Append data dat to the end of the list
-    Node *n = new Node();
-    n->data = dat;
-    n->next = nullptr;
+    Node *n = new Node(dat);
     if (length == 0){
     	// Empty list: head also points to new node
         head = n;
@@ -63,8 +74,7 @@ void SingleLinkedList<T>::appendNode(T dat){
 template <class T>
 void SingleLinkedList<T>::prependNode(T dat){
 	// Prepend data dat to the beginning of the list
-	Node *n = new Node();
-	n->data = dat;
+	Node *n = new Node(dat);
 	n->next = head;
 	head = n;
 	if (tail == nullptr) tail = n;
@@ -99,8 +109,7 @@ void SingleLinkedList<T>::insertNode(int index, T dat){
 		appendNode(dat);
 	}
 	else{
-		Node *n = new Node();
-		n->data = dat;
+		Node *n = new Node(dat);
     	int position = 0;
     	Node *current_node = head;
     	Node *previous_node = head;
