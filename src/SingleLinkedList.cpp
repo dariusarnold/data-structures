@@ -38,7 +38,7 @@ SingleLinkedList<T>::~SingleLinkedList(){
 }
 
 template<class T>
-void SingleLinkedList<T>::printList(){
+void SingleLinkedList<T>::printList() const{
     // Traverse list from head to tail and print all data
     Node *current = head;
     if (current == nullptr){
@@ -52,7 +52,7 @@ void SingleLinkedList<T>::printList(){
 }
 
 template<class T>
-bool SingleLinkedList<T>::isEmpty(){
+bool SingleLinkedList<T>::isEmpty() const{
 	return length == 0 ? true : false;
 }
 

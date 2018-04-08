@@ -13,7 +13,6 @@ TODO
   * Use `std::size_t` for indexing
   * Implement ostream (<<) operator
   * Implement similar interface to std::forward list (names and methods)
-  * Make functions constant when they are not changing their argument
   * Replace new/delete with unique_ptr or shared_ptr
   * File IO: save to file, load from file
 

@@ -22,18 +22,18 @@ class SingleLinkedList{
     SingleLinkedList();
     ~SingleLinkedList();
     // Append dat to the end if the list
-    void appendNode(T dat);
+    void appendNode(T data);
     // Prepend dat to the beginning of the list
-    void prependNode(T dat);
+    void prependNode(T data);
     // Enable read/write index access
     T& operator[](int index);
     // Insert dat at position index
-    void insertNode(int index, T dat);
+    void insertNode(int index, T data);
     // Delete Node at index
     void deleteNode(int index);
-    bool isEmpty();
+    bool isEmpty() const;
     // Output List
-    void printList();
+    void printList() const;
 };
 
 #include "SingleLinkedList.cpp"
