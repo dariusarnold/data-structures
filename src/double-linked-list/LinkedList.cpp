@@ -88,14 +88,11 @@ Item* LinkedList::find(int x){
 	Item* current_node = dummy;
 	do {
 		current_node = current_node->next;
-		if (current_node->e == x){
-			dummy-> e = 0;
-			return current_node;
-		}
+		if (current_node->e == x) break;
 	}
 	while (current_node != dummy);
-	dummy->e = 0;
-	return dummy;
+	dummy->e = 0; //remove elephant from Kairo
+	return current_node;
 };
 
 int LinkedList::size(){
