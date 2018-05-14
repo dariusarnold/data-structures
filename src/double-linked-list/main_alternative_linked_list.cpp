@@ -1,9 +1,9 @@
 #include "AlternativeLinkedList.h"
 #include "test.h"
 
-int main()
+int notmain()
 {
-    AlternativeLinkedList l;
-    test_list(&l, true);
+    //AlternativeLinkedList l;
+    //test_list(&l, true);
     return 0;
 }

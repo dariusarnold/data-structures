@@ -59,6 +59,8 @@ void test_list(List * l, bool a)
 {
     int success = 1;
 
+    cout << "Testing list" << endl;
+
     success *= compare_list_size(l, a);
     if(!success)
     {
@@ -110,7 +112,6 @@ void test_list(List * l, bool a)
         return;
     }
 
-
     //test moveToFront()
     l->moveToFront(l->last());
     success *= compare_list_test_case(l, test_3, TEST_LENGTH, a);
@@ -121,7 +122,6 @@ void test_list(List * l, bool a)
         return;
     }
 
-
     //test moveToBack()
     l->moveToBack(l->first());
     success *= compare_list_test_case(l, test_2, TEST_LENGTH, a);
@@ -131,7 +131,6 @@ void test_list(List * l, bool a)
         print_list(l, a);
         return;
     }
-
 
     //test remove()
     l->remove(l->first());
@@ -247,11 +246,13 @@ void test_list(List * l, bool a)
     success *= !find_element(l, 87);
     if(!success)
     {
-        cout << "Error in find()" << endl;
+        cout << "Error in find() 87" << endl;
         print_list(l, a);
         return;
     }
 
     if(success)
         cout << "All tests passed." << endl;
+    else
+    	cout << "Tests failed." << endl;
 }
