@@ -43,6 +43,7 @@ Item* FreeList::getItem(){
 		Item* a = dummy->next;
 		dummy->next = a->next;
 		a->next->prev = dummy;
+		a->e = -1;
 		return a;
 	}else{
 		// free list is empty, allocate a new item block and return one
