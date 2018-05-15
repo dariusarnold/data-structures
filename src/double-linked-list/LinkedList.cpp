@@ -22,7 +22,7 @@ void LinkedList::splice(Item* a, Item* b, Item* t){
 	t->next = a;
 	t_next_saved->prev = b;
 
-};
+}
 
 Item* LinkedList::getNewNode(int x){
 	Item* n = free.getItem();
@@ -32,20 +32,20 @@ Item* LinkedList::getNewNode(int x){
 
 bool LinkedList::isEmpty(){
 	return (dummy->next ==dummy->prev);
-};
+}
 
 void LinkedList::moveAfter(Item* b, Item* a){
 	// moves b after a
 	splice(b, b, a);
-};
+}
 
 void LinkedList::moveToFront(Item* b){
 	splice(b, b, dummy);
-};
+}
 
 void LinkedList::moveToBack(Item* b){
 	splice(b, b, dummy->prev);
-};
+}
 
 void LinkedList::remove(Item* b){
 	if (b == head()) return; // dont remove dummy node
@@ -68,19 +68,19 @@ Item* LinkedList::insertAfter(int x, Item* a){
 	Item* new_node = getNewNode(x);
 	moveAfter(new_node, a);
 	return new_node;
-};
+}
 
 Item* LinkedList::insertBefore(int x, Item* b){
 	return insertAfter(x, b->prev);
-};
+}
 
 void LinkedList::pushFront(int x){
 	insertAfter(x, dummy);
-};
+}
 
 void LinkedList::pushBack(int x){
 	insertAfter(x, dummy->prev);
-};
+}
 
 Item* LinkedList::find(int x){
 	dummy->e = x; //place an elephant in Kairo
@@ -92,7 +92,7 @@ Item* LinkedList::find(int x){
 	while (current_node != dummy);
 	dummy->e = 0; //remove elephant from Kairo
 	return current_node;
-};
+}
 
 int LinkedList::size(){
 	Item* current_node = dummy->next;
@@ -102,7 +102,7 @@ int LinkedList::size(){
 		++size;
 	}
 	return size;
-};
+}
 
 Item* LinkedList::head(){
 	return dummy;
