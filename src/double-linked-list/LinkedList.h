@@ -55,16 +55,16 @@ public:
      */
     void moveToBack(Item* b);
     /**
-     * Remove item b from the list
+     * Remove item b from the list and attach it to the FreeList
      * @param b Item to remove
      */
     void remove(Item* b);
     /**
-     * Remove the first item in the list
+     * Remove the first item in the list and attach it to the FreeList
      */
     void popFront();
     /**
-     * Remove the last item in the list
+     * Remove the last item in the list and attach it to the FreeList
      */
     void popBack();
     /**
@@ -99,12 +99,20 @@ public:
      * @return Pointer to the first element with value x if x is in list, pointer to dummy element otherwise.
      */
     Item* find(int x);
+    /**
+     * Gives size of LinkedList by counting the elements. Dummy element is excluded.
+     * @return size of linked lists.
+     */
     int size();
 private:
     /**
      * Pointer to dummy element, acts as an entry point to the list.
      */
     Item* dummy;
+    /**
+     * FreeList containing all items deleted from the main list. Used to save declarations by reusing nodes.
+     */
+    FreeList free;
     /**
      * Returns a new node instance with a set value. If the FreeList contains nodes, returns one from the FreeList,
      * otherwise it will allocate multiple new nodes, attach them to the FreeList and return one.

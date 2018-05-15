@@ -15,9 +15,25 @@
  * Element aus der LinkedList entfernt, kann es in die FreeList eingehängt
  * und zu einem späteren Zeitpunkt wiederverwendet werden.
  */
-class FreeList
-{
-
+class FreeList{
+public:
+	FreeList();
+	bool isEmpty();
+	Item* getItem();
+	void appendItem(Item* a);
+private:
+	/**
+	 * Size of chunk of items to be allocated at once
+	 */
+	int blocksize = 10;
+	/**
+	 * Pointer to dummy node
+	 */
+	Item* dummy;
+	/**
+	 * Allocate a block of new items with size blocksize, used when FreeList is empty
+	 */
+	void allocateItemBlock();
 };
 
 #endif // FREELIST_H

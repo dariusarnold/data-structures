@@ -6,7 +6,8 @@ LinkedList::LinkedList(){
 	dummy->next = dummy;
 	dummy->prev = dummy;
 	dummy->e = 0;
-};
+	FreeList free;
+}
 
 void LinkedList::splice(Item* a, Item* b, Item* t){
 	if (a->prev != nullptr and a-> next != nullptr and b->prev != nullptr and b->next != nullptr){
@@ -24,7 +25,9 @@ void LinkedList::splice(Item* a, Item* b, Item* t){
 };
 
 Item* LinkedList::getNewNode(int x){
-	return new Item(x);
+	Item* n = free.getItem();
+	n->e = x;
+	return n;
 }
 
 bool LinkedList::isEmpty(){
@@ -45,22 +48,21 @@ void LinkedList::moveToBack(Item* b){
 };
 
 void LinkedList::remove(Item* b){
+	if (b == head()) return; // dont remove dummy node
 	b->prev->next = b->next;
 	b->next->prev = b->prev;
-};
+	free.appendItem(b);
+}
 
 void LinkedList::popFront(){
-	Item* second_node = dummy->next->next;
-	dummy->next = second_node;
-	second_node->prev = dummy;
-
-};
+	Item* front = first();
+	remove(front);
+}
 
 void LinkedList::popBack(){
-	Item* second_to_last_node = dummy->prev->prev;
-	dummy->prev = second_to_last_node;
-	second_to_last_node->next = dummy;
-};
+	Item* back = last();
+	remove(back);
+}
 
 Item* LinkedList::insertAfter(int x, Item* a){
 	Item* new_node = getNewNode(x);
@@ -69,9 +71,6 @@ Item* LinkedList::insertAfter(int x, Item* a){
 };
 
 Item* LinkedList::insertBefore(int x, Item* b){
-	//Item* new_node = getNewNode(x);
-	/*moveAfter(new_node, b->prev);
-	return new_node;*/
 	return insertAfter(x, b->prev);
 };
 
