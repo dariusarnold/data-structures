@@ -14,7 +14,7 @@ FreeList::~FreeList(){
 		previous_node = current_node;
 		current_node = current_node->next;
 		delete previous_node;
-	} while (current_node =! dummy);
+	} while (current_node != dummy);
 	delete dummy;
 }
 
