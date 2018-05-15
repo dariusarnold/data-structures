@@ -17,9 +17,27 @@
  */
 class FreeList{
 public:
+	/**
+	 * Create a new FreeList, allocating a chunk of blocksize new items.
+	 */
 	FreeList();
+	/**
+	 * Delete FreeList with all items including the dummy element.
+	 */
+	~FreeList();
+	/**
+	 * @return True if the list is empty, false otherwise
+	 */
 	bool isEmpty();
+	/**
+	 * Get item from free list, allocating a chunk of blocksize new items if FreeList is empty.
+	 * @return Pointer to new item
+	 */
 	Item* getItem();
+	/**
+	 * Append an item to the FreeList.
+	 * @param a Item to append. Will be inserted into the first position behind the dummy element.
+	 */
 	void appendItem(Item* a);
 private:
 	/**
