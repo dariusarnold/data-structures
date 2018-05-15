@@ -18,7 +18,6 @@ LinkedList::~LinkedList(){
 		delete previous_node;
 	} while (current_node != dummy);
 	delete dummy;
-	delete free;
 }
 
 void LinkedList::splice(Item* a, Item* b, Item* t){
