@@ -17,6 +17,10 @@ public:
 	 */
     LinkedList();
     /**
+     * Delete LinkedList with all elements, including the dummy node
+     */
+    ~LinkedList();
+    /**
      * Remove sequence a to b from list and attach it after t.
      */
     void splice(Item* a, Item* b, Item* t);

@@ -7,6 +7,17 @@ FreeList::FreeList(){
 	allocateItemBlock();
 }
 
+FreeList::~FreeList(){
+	Item* current_node = dummy->next;
+	Item* previous_node = dummy->next;
+	do {
+		previous_node = current_node;
+		current_node = current_node->next;
+		delete previous_node;
+	} while (current_node =! dummy);
+	delete dummy;
+}
+
 void FreeList::allocateItemBlock(){
 	for (int i = 0; i < blocksize; i++){
 		Item* t = new Item();

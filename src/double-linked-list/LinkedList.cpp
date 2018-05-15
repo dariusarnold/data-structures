@@ -9,6 +9,18 @@ LinkedList::LinkedList(){
 	FreeList free;
 }
 
+LinkedList::~LinkedList(){
+	Item* current_node = first();
+	Item* previous_node = first();
+	do {
+		previous_node = current_node;
+		current_node = current_node->next;
+		delete previous_node;
+	} while (current_node != dummy);
+	delete dummy;
+	delete free;
+}
+
 void LinkedList::splice(Item* a, Item* b, Item* t){
 	if (a->prev != nullptr and a-> next != nullptr and b->prev != nullptr and b->next != nullptr){
 		//remove sequence a to b from list if it is in list
